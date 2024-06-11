@@ -15,8 +15,8 @@ app.get('/consumption', async(req, res)=>{
   const list = await consumptionModel.find({});
   res.json( list );
 });
-app.get('/consumption/:code', async(req, res)=>{
-  const consumption = await consumptionModel.find({code:req.params.code});
+app.get('/consumption/:codeFood', async(req, res)=>{
+  const consumption = await consumptionModel.find({codeFood:req.params.codeFood});
   res.json( consumption );
 });
 app.post('/consumption', async(req, res)=>{
