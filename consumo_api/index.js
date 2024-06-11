@@ -26,6 +26,7 @@ app.post('/consumption', async(req, res)=>{
     const alumno=await alumnoService.get(codigo);
     console.log("ALUMNO", alumno);
     if(!alumno) throw ("Alumno no encontrado");
+    if( alumno.codigo!='NO EXISTE') throw ("ALUMNO NO EXISTE");
 
     const consumption = new consumptionModel({codeFood, codigo, typeFood, nameFood });
     const data = await consumption.save();
