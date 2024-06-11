@@ -1,5 +1,5 @@
 services:
-  company_api:
+  alumno_api:
     build:
       context: ./alumno_api
       dockerfile: Dockerfile
@@ -9,7 +9,7 @@ services:
     ports:
       - "80:8080"
   
-  person_api:
+  consumo_api:
     build:
       context: ./consumo_api
       dockerfile: Dockerfile

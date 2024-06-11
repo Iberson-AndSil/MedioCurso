@@ -1,6 +1,6 @@
 const express = require("express")
 const loanService = require("./services/alumnoService");
-const uri = 'mongodb+srv://henry23tc:Passw0rd23@comedor.tbubtrv.mongodb.net/'
+const uri = 'mongodb+srv://henry23tc:Passw0rd20@comedor.tbubtrv.mongodb.net/'
 
 
 const mongoose = require('mongoose');
@@ -25,8 +25,7 @@ app.post('/consumption', async(req, res)=>{
     
     const alumno=await alumnoService.get(codeStudent);
     console.log("ALUMNO", alumno);
-    if(!alumno) throw ("LOAN_NOT_FOUND");
-    if( alumno.status!='PENDING') throw ("LOAN_NOT_PENDING");
+    if(!alumno) throw ("Alumno no encontrado");
 
     const consumption = new consumptionModel({codeFood, codeStudent, typeFood, nameFood });
     const data = await consumption.save();

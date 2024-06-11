@@ -1,5 +1,5 @@
 const express = require("express")
-const uri = 'mongodb+srv://henry23tc:Passw0rd23@comedor.tbubtrv.mongodb.net/'
+const uri = 'mongodb+srv://henry23tc:Passw0rd20@comedor.tbubtrv.mongodb.net/'
 
 const mongoose = require('mongoose');
 mongoose.connect(uri);
