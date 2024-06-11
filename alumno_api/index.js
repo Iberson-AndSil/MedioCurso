@@ -28,7 +28,7 @@ app.post('/alumno', async(req, res)=>{
     const name = req.body.name;
     const lastname = req.body.lastname;
 
-    const alumno = new alumnoModel({ codigo, dni,name,lastname, birthday});
+    const alumno = new alumnoModel({ codigo, dni,name,lastname});
 
     const data = await alumno.save();
     return res.status(201).json(data);
