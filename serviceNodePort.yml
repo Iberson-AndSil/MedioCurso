@@ -1,0 +1,77 @@
+# Service and Deployment for person-api
+apiVersion: v1
+kind: Service
+metadata:
+  name: person-api-service
+spec:
+  type: NodePort
+  selector:
+    app: person-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30072
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: person-api-deployment
+  labels:
+    app: person-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: person-api
+  template:
+    metadata:
+      labels:
+        app: person-api
+    spec:
+      containers:
+        - name: person-api-container
+          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/person_api:latest"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+# Service and Deployment for company-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: company-api-service
+spec:
+  type: NodePort
+  selector:
+    app: company-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30073
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: company-api-deployment
+  labels:
+    app: company-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: company-api
+  template:
+    metadata:
+      labels:
+        app: company-api
+    spec:
+      containers:
+        - name: company-api-container
+          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/company_api"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+

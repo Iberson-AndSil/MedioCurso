@@ -1,0 +1,20 @@
+services:
+  company_api:
+    build:
+      context: ./alumno_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: alumno_api
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+  
+  person_api:
+    build:
+      context: ./consumo_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: consumo_api
+    restart: unless-stopped
+    ports:
+      - "81:8080"
