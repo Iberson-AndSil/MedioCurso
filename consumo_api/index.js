@@ -1,5 +1,5 @@
 const express = require("express")
-const loanService = require("./services/alumnoService");
+const alumnoService = require("./services/alumnoService");
 const uri = 'mongodb+srv://henry23tc:Passw0rd20@comedor.tbubtrv.mongodb.net/'
 
 
@@ -21,15 +21,14 @@ app.get('/consumption/:codeFood', async(req, res)=>{
 });
 app.post('/consumption', async(req, res)=>{
   try {
-    const {codeFood, codeStudent, typeFood, nameFood} = req.body;
+    const {codeFood, codigo, typeFood, nameFood} = req.body;
     
-    const alumno=await alumnoService.get(codeStudent);
+    const alumno=await alumnoService.get(codigo);
     console.log("ALUMNO", alumno);
     if(!alumno) throw ("Alumno no encontrado");
 
-    const consumption = new consumptionModel({codeFood, codeStudent, typeFood, nameFood });
+    const consumption = new consumptionModel({codeFood, codigo, typeFood, nameFood });
     const data = await consumption.save();
-    await loanService.changeStatus(codeStudent,'PAID');
     return res.status(201).json(data);
     
 
