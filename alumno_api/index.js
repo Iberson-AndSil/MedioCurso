@@ -6,27 +6,31 @@ mongoose.connect(uri);
 const app = express()
 app.use( express.json() )
 const port = 8080
-const { peopleModel } = require('./models');
-app.get('/', (req, res) => { res.send("I am alive People"); })
+const { alumnoModel } = require('./models');
+app.get('/', (req, res) => { res.send("Este es el perfil del Alumno"); })
 
-app.get('/people', async(req, res)=>{
-  const people = await peopleModel.find({});
-  res.json( people );
+app.get('/alumno', async(req, res)=>{
+  const alumno = await alumnoModel.find({});
+  res.json( alumno );
 });
-app.get('/people/:dni', async(req, res)=>{
-  const person = await peopleModel.find({dni:req.params.dni});
-  res.json( person );
+app.get('/alumno/:codigo', async(req, res)=>{
+  const alumno = await alumnoModel.find({codigo:req.params.codigo});
+  res.json( alumno );
 });
-app.post('/people', async(req, res)=>{
+app.get('/alumno/:dni', async(req, res)=>{
+  const alumno = await alumnoModel.find({dni:req.params.dni});
+  res.json( alumno );
+});
+app.post('/alumno', async(req, res)=>{
   try {
+    const codigo = req.body.codigo;
     const dni = req.body.dni;
     const name = req.body.name;
     const lastname = req.body.lastname;
-    const birthday = req.body.birthday;
 
-    const person = new peopleModel({ dni,name,lastname, birthday});
+    const alumno = new alumnoModel({ codigo, dni,name,lastname, birthday});
 
-    const data = await person.save();
+    const data = await alumno.save();
     return res.status(201).json(data);
   } catch (error) {
     console.log('Error', error);

@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
-const peopleSchema = new mongoose.Schema({
+const alumnoSchema = new mongoose.Schema({
+    codigo: {
+        type: String,
+        required: true
+    },
     dni: {
         type: String,
         required: true
-      },
+    },
     name: {
       type: String,
       required: true
@@ -12,14 +16,10 @@ const peopleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    birthday: {
-      type: Date,
-      required: true
-    },
     createdAt: {
       type: Date,
       default: Date.now
     }
   });
 
-  module.exports = {peopleSchema}
+  module.exports = {alumnoSchema}
