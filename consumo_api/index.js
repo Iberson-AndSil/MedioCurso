@@ -1,5 +1,5 @@
 const express = require("express")
-const loanService = require("./services/loanService");
+const loanService = require("./services/alumnoService");
 const uri = 'mongodb+srv://henry23tc:Passw0rd23@comedor.tbubtrv.mongodb.net/'
 
 
@@ -8,29 +8,29 @@ mongoose.connect(uri);
 const app = express()
 app.use( express.json() )
 const port = 8080
-const { payModel } = require('./models');
-app.get('/', (req, res) => { res.send("I am alive payments"); })
+const { consumptionModel } = require('./models');
+app.get('/', (req, res) => { res.send("I am alive consumption"); })
 
-app.get('/payments', async(req, res)=>{
-  const list = await payModel.find({});
+app.get('/consumption', async(req, res)=>{
+  const list = await consumptionModel.find({});
   res.json( list );
 });
-app.get('/payments/:code', async(req, res)=>{
-  const payment = await payModel.find({code:req.params.code});
-  res.json( payment );
+app.get('/consumption/:code', async(req, res)=>{
+  const consumption = await consumptionModel.find({code:req.params.code});
+  res.json( consumption );
 });
-app.post('/payments', async(req, res)=>{
+app.post('/consumption', async(req, res)=>{
   try {
-    const {code, loanCode, money, status} = req.body;
+    const {codeFood, codeStudent, typeFood, nameFood} = req.body;
     
-    const loan=await loanService.get(loanCode);
-    console.log("LOAN", loan);
-    if(!loan) throw ("LOAN_NOT_FOUND");
-    if( loan.status!='PENDING') throw ("LOAN_NOT_PENDING");
+    const alumno=await alumnoService.get(codeStudent);
+    console.log("ALUMNO", alumno);
+    if(!alumno) throw ("LOAN_NOT_FOUND");
+    if( alumno.status!='PENDING') throw ("LOAN_NOT_PENDING");
 
-    const payment = new payModel({code, loanCode, money, status });
-    const data = await payment.save();
-    await loanService.changeStatus(loanCode,'PAID');
+    const consumption = new consumptionModel({codeFood, codeStudent, typeFood, nameFood });
+    const data = await consumption.save();
+    await loanService.changeStatus(codeStudent,'PAID');
     return res.status(201).json(data);
     
 
