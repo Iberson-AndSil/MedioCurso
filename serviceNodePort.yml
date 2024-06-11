@@ -1,12 +1,12 @@
-# Service and Deployment for person-api
+# Service and Deployment for alumno-api
 apiVersion: v1
 kind: Service
 metadata:
-  name: person-api-service
+  name: alumno-api-service
 spec:
   type: NodePort
   selector:
-    app: person-api
+    app: alumno-api
   ports:
     - protocol: TCP
       port: 80
@@ -16,36 +16,36 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: person-api-deployment
+  name: alumno-api-deployment
   labels:
-    app: person-api
+    app: alumno-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: person-api
+      app: alumno-api
   template:
     metadata:
       labels:
-        app: person-api
+        app: alumno-api
     spec:
       containers:
-        - name: person-api-container
-          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/person_api:latest"
+        - name: alumno-api-container
+          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/alumno_api:latest"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
 
-# Service and Deployment for company-api
+# Service and Deployment for consumo-api
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: company-api-service
+  name: consumo-api-service
 spec:
   type: NodePort
   selector:
-    app: company-api
+    app: consumo-api
   ports:
     - protocol: TCP
       port: 80
@@ -55,22 +55,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: company-api-deployment
+  name: consumo-api-deployment
   labels:
-    app: company-api
+    app: consumo-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: company-api
+      app: consumo-api
   template:
     metadata:
       labels:
-        app: company-api
+        app: consumo-api
     spec:
       containers:
-        - name: company-api-container
-          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/company_api"
+        - name: consumo-api-container
+          image: "058264105727.dkr.ecr.us-east-1.amazonaws.com/consumo_api"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
